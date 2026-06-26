@@ -768,7 +768,8 @@ function lbImport(){document.getElementById('lbCsvPicker').click()}
 function lbHandleFiles(files){if(!files||!files.length)return;var pending=files.length,imported=[];for(var i=0;i<files.length;i++){(function(file){var reader=new FileReader();reader.onload=function(e){var rows=parseCSV(e.target.result);imported=imported.concat(rows);pending--;if(pending<=0){var existing=JSON.parse(localStorage.getItem('bingo_records')||'[]');var all=existing.concat(imported);var seen={},deduped=[];all.forEach(function(r){var key=(r.name||'')+'|'+(r.empId||'')+'|'+(r.date||'')+'|'+(r.score||'')+'|'+(r.time||'');if(!seen[key]){seen[key]=true;deduped.push(r)}});localStorage.setItem('bingo_records',JSON.stringify(deduped));lbData=deduped;renderLB();toast('✅ Records imported','ok',2500)}};reader.readAsText(file,'utf-8')})(files[i])}document.getElementById('lbCsvPicker').value=''}
 function lbExport(){var recs=lbData&&lbData.length?lbData:[];if(!recs.length)return;var csv='\uFEFFNo.,Name,Employee ID,Date/Time,Source,Score,Bingo,Time,Wrong,Accuracy,Status\n';recs.forEach(function(r,i){csv+=(i+1)+',"'+r.name+'","'+(r.empId||'')+'","'+r.date+'","'+(r.source||'Office')+'",'+r.score+','+r.bingo+','+r.time+','+r.wrong+','+(r.accuracy||'-')+',"'+r.status+'"\n'});var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Bingo_Leaderboard.csv';a.click()}
 function parseScoreNum(s){if(!s)return 0;var m=String(s).match(/(\d+)/);return m?parseInt(m[1]):0}
-function parseTimeSeconds(t){if(!t)return 999;var p=String(t).split(':');if(p.length===2)return parseInt(p[0])*60+parseInt(p[1]);return 999}
+function formatTimeStr(t){if(!t)return'-';var s=String(t);if(s.indexOf('T')!==-1){var m=s.match(/T\d{2}:(\d{2}:\d{2})/);if(m)return m[1]}return s}
+function parseTimeSeconds(t){var s=formatTimeStr(t);if(s==='-')return 999;var p=s.split(':');if(p.length===2)return parseInt(p[0])*60+parseInt(p[1]);return 999}
 function parseAccNum(a){if(!a)return 0;var m=String(a).match(/(\d+)/);return m?parseInt(m[1]):0}
 function calcOverall(r){return parseScoreNum(r.score)*10+parseInt(r.bingo||0)*25+parseAccNum(r.accuracy)*2-parseInt(r.wrong||0)*5-parseTimeSeconds(r.time)*0.5}
 
@@ -791,14 +792,14 @@ function renderLB(){
   podOrder.forEach(function(pi){
     if(pi>=sorted.length){podDiv.innerHTML+='<div class="pod-item" style="visibility:hidden"><div class="pod-av">-</div><div class="pod-bar"></div></div>';return}
     var r=sorted[pi],cls='pod-'+(pi+1),initial=(r.name||'?').charAt(0).toUpperCase();
-    var sv=lbSort==='speed'?r.time:lbSort==='accuracy'?r.accuracy:lbSort==='bingo'?(r.bingo||0)+' lines':lbSort==='score'?r.score:calcOverall(r).toFixed(0)+'pts';
+    var sv=lbSort==='speed'?formatTimeStr(r.time):lbSort==='accuracy'?r.accuracy:lbSort==='bingo'?(r.bingo||0)+' lines':lbSort==='score'?r.score:calcOverall(r).toFixed(0)+'pts';
     podDiv.innerHTML+='<div class="pod-item '+cls+'"><div class="pod-av">'+initial+'<span class="pod-medal">'+medals[pi]+'</span></div><div class="pod-name" title="'+r.name+'">'+r.name+'</div><div class="pod-score">'+sv+'</div><div class="pod-bar"></div></div>'
   });
   var maxSc=24;
   var h='<div class="lb-tw"><table><thead><tr><th style="text-align:center">#</th><th>Name</th><th>Emp ID</th><th>Score</th><th>Bingo</th><th>Time</th><th>Accuracy</th><th>Wrong</th><th>Status</th></tr></thead><tbody>';
   sorted.forEach(function(r,i){var rk=i+1,rkCls=rk<=3?'rk rk-'+rk:'rk',rkTxt=rk<=3?medals[rk-1]+' '+rk:rk;
     var scN=parseScoreNum(r.score),barW=Math.round(scN/maxSc*60);
-    h+='<tr><td class="'+rkCls+'">'+rkTxt+'</td><td class="nm">'+r.name+'</td><td>'+(r.empId||'-')+'</td><td>'+r.score+' <span class="sc-bar" style="width:'+barW+'px"></span></td><td>'+r.bingo+'</td><td>'+r.time+'</td><td>'+r.accuracy+'</td><td>'+r.wrong+'</td><td>'+r.status+'</td></tr>'
+    h+='<tr><td class="'+rkCls+'">'+rkTxt+'</td><td class="nm">'+r.name+'</td><td>'+(r.empId||'-')+'</td><td>'+r.score+' <span class="sc-bar" style="width:'+barW+'px"></span></td><td>'+r.bingo+'</td><td>'+formatTimeStr(r.time)+'</td><td>'+r.accuracy+'</td><td>'+r.wrong+'</td><td>'+r.status+'</td></tr>'
   });
   h+='</tbody></table></div>';
   wrap.innerHTML=h
