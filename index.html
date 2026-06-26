@@ -290,7 +290,8 @@
           <li>BINGO Lines Achieved</li>
           <li>Completion Time</li>
         </ul>
-      <li>🔄 Reset: Restart current game (cards reshuffled). 🚪 Quit: Return to login screen.</li>
+      <li>🔄 Reset: Reshuffle cards only, this will not reset the game progress. 🚪 Quit: Return to login screen.</li>
+      <li>Play in <b>Full-Screen</b> to have better user experience.</li>
       </li>
     </ol>
 
@@ -578,7 +579,29 @@ function endG(to){
   saveToServer(rec);showS('resultsScreen')
 }
 
-function resetG(){clearInterval(tmrI);document.getElementById('tmr').classList.remove('warn');initG();startTmr()}
+function resetG(){
+  
+  if(ended) return;
+
+  // Only reshuffle cards that have NOT been placed yet
+  const remainingCards = cards.filter(c => !c.placed);
+
+  // Shuffle the remaining cards
+  const shuffled = shuf(remainingCards);
+
+  // Put them back into the cards array
+  let idx = 0;
+
+  cards = cards.map(card => {
+    if(card.placed) return card;
+    return shuffled[idx++];
+  });
+
+  renCards();
+
+  toast('🔄 Remaining cards reshuffled!', 'ok');
+}
+  
 function quitG(){clearInterval(tmrI);document.getElementById('tmr').classList.remove('warn');showS('loginScreen')}
 function playAgain(){showS('loginScreen')}
 
