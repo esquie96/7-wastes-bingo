@@ -426,7 +426,7 @@ function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.r
 function toast(m,tp='ok',d=1800){const c=document.getElementById('tC'),e=document.createElement('div');e.className='tt '+tp;e.textContent=m;c.appendChild(e);setTimeout(()=>{e.style.opacity='0';e.style.transition='opacity .3s';setTimeout(()=>e.remove(),300)},d)}
 function showAdmLogin(){document.getElementById('aModal').classList.add('on');document.getElementById('aPwd').value='';document.getElementById('aPwd').focus()}
 function clsModal(){document.getElementById('aModal').classList.remove('on')}
-function cfmAdm(){if(document.getElementById('aPwd').value==='ST2026'){clsModal();showAdmin()}else toast('Wrong password!','er')}
+function cfmAdm(){if(document.getElementById('aPwd').value==='UAS2026'){clsModal();showAdmin()}else toast('Wrong password!','er')}
 
 function showHowToPlay(){
   document.getElementById('howToPlayModal').classList.add('on');
