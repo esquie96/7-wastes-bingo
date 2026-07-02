@@ -15,7 +15,14 @@
 .start-play-btn{width:30%;padding:16px;background:#1976D2;color:#fff;border:none;border-radius:10px;font-size:25px;font-weight:700;cursor:pointer;transition:.3s;margin-top:8px}
 .start-play-btn:hover{background:#1259A8;transform:translateY(-2px);box-shadow:0 6px 18px rgba(25,118,210,.4)}
 .adm-ico{position:absolute;top:12px;right:16px;font-size:26px;cursor:pointer;opacity:.4;transition:.3s;background:none;border:none}
-.adm-ico:hover{opacity:1}#gameScreen{flex-direction:column;background:#1976D2;padding:8px;min-height:100vh}
+.adm-ico:hover{opacity:1}
+#gameScreen{
+  flex-direction:column;
+  background:#1976D2;
+  padding:8px;
+  height:100vh;
+  overflow:hidden;
+}
 .g-head{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:rgba(0,0,0,.15);border-radius:8px;margin-bottom:6px;flex-wrap:wrap;gap:6px}
 .g-head .pinfo{color:#fff;font-weight:700;font-size:14px}
 .timer{background:#111;color:#FFD700;font-size:26px;font-weight:900;padding:5px 16px;border-radius:6px;font-family:"Courier New",monospace;letter-spacing:2px;min-width:90px;text-align:center}
@@ -29,23 +36,49 @@
 .cbank{flex:1;display:flex;flex-direction:column;gap:5px;overflow-y:auto;max-height:calc(100vh - 120px);padding:3px;scrollbar-width:thin}
 .cbank::-webkit-scrollbar{width:5px}.cbank::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3);border-radius:3px}
 .cbank-t{color:#FFD700;font-weight:700;font-size:15px;text-align:center;padding:4px;background:rgba(0,0,0,.2);border-radius:5px;position:sticky;top:0;z-index:2}
-.scard{background:#fff;border-radius:6px;padding:8px 10px;font-size:13px;line-height:1.50;color:#333;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.12);transition:.2s;border-left:4px solid #FFD700;user-select:none;position:relative}
+.scard{
+  background:#fff;
+  border-radius:6px;
+  padding:4px 6px;
+  font-size:12px;
+  line-height:1.25;
+  min-height:55px;
+  color:#333;
+  cursor:grab;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  transition:.2s;
+  border-left:4px solid #FFD700;user-select:none;
+  position:relative
+}
 .scard:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.2)}
 .scard.dragging{opacity:.4;transform:rotate(2deg)}
 .scard .cnum{position:absolute;top:3px;right:6px;font-size:9px;color:#bbb;font-weight:700}
-.scard .csrc{font-size:14px;color:#999;margin-bottom:2px}
+.scard .csrc{font-size:13px;color:#999;margin-bottom:2px}
+
 .board-wrap{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:auto;}
 .b-title{color:#fff;font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:1px;text-shadow:0 2px 4px rgba(0,0,0,.3)}
-.bh{display:grid;grid-template-columns:repeat(5,88px);gap:3px;margin-bottom:3px}
+.bh{
+  display:grid;
+  grid-template-columns:repeat(5,100px);
+  gap:4px;
+  margin-bottom:4px
+}
 .bh-l{height:32px;background:#1565C0;color:#fff;font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;border-radius:2px}
-.bg{display:grid;grid-template-columns:repeat(5,130px);grid-template-rows:repeat(5,130px);gap:5px;position:relative;background:#1565C0;border-radius:2px}
+.bg{
+  display:grid;
+  grid-template-columns:repeat(5,100px);
+  grid-template-rows:repeat(5,100px);
+  gap:4px;position:relative;
+  background:#1565C0;
+  border-radius:2px
+}
 .bc{background:#fff;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4px;transition:.2s;position:relative;border:2px solid transparent;overflow:hidden}
-.bc .en{font-size:13px;color:#1A1A1A;font-weight:800;line-height:1.2}
+.bc .en{font-size:12px;color:#1A1A1A;font-weight:800;line-height:1.2}
 .bc.free{background:#F0F0F0}
 .bc.dov{border-color:#FFD700;background:#FFFDE7;transform:scale(1.04)}
 .bc.ok{background:#4CAF50;border-color:#388E3C}
 .bc.ok .en{color:#fff}
-.bc.ok .mtxt{font-size:10px;color:rgba(255,255,255,.85);line-height:1.15;max-height:36px;overflow:hidden;margin-top:2px;padding:0 2px}
+.bc.ok .mtxt{font-size:10px;color:rgba(255,255,255,.85);line-height:1.15;max-height:28px;overflow:hidden;margin-top:2px;padding:0 2px}
 .bc.ok .mico{position:absolute;top:1px;right:3px;font-size:12px}
 .lines-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10}
 .bline{stroke:#FFD700;stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,215,0,.8))}
@@ -69,7 +102,7 @@
 .mb input:focus{border-color:#1976D2;outline:none}.mbs{display:flex;gap:8px;justify-content:center}.mbs button{padding:8px 22px;border:none;border-radius:7px;font-weight:700;cursor:pointer;font-size:15px}
 .mbs .cf{background:#1976D2;color:#fff}.mbs .cc{background:#eee;color:#666}.confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9997;overflow:hidden}
 .confetti span{position:absolute;width:10px;height:10px;opacity:.8;animation:fall linear forwards}@keyframes fall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}@media(max-width:1100px){.bg{grid-template-columns:repeat(5,70px);grid-template-rows:repeat(5,70px)}
-.bh{grid-template-columns:repeat(5,70px)}.bh-l{height:28px;font-size:18px}.bc .en{font-size:14px}}
+.bh-l{height:28px;font-size:18px}}
 
 @media(max-width:768px)
 {.g-body{
@@ -138,17 +171,15 @@
 .cbank-bottom{
   width:100%;
   background:rgba(0,0,0,0.15);
-  padding:10px;
+  padding:6px;
   margin-top:8px;
 }
 
 /* Grid layout for cards */
 .card-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:8px;
-  max-height:250px;
-  overflow-y:auto;
+  grid-template-columns:repeat(8, 1fr);
+  gap:4px;
 }
 
 .scard{
@@ -274,26 +305,34 @@
 <!-- How To Play Modal -->
 <div class="mo" id="howToPlayModal">
   <div class="mb" style="max-width:900px;text-align:left">
-    <h3 style="text-align:center;font-size:25px">How to Play</h3>
-
-    <ol style="padding-left:20px;font-size:20px;line-height:1.6;color:#333">
-      <li>Match all 24 scenario cards correctly before time runs out.</li>
-      <li>Game time limit: 5 minutes (300 seconds).</li>
-      <li>Review the Scenario Cards at the bottom of the screen.</li>
-      <li>Drag a scenario card and drop it onto the matching waste category on the BINGO board.</li>
+    <h3 style="text-align:left;font-size:25px;color:#1976D2;">How to Play</h3>
+    <ul style="padding-left:20px;font-size:20px;line-height:1.6;color:#333">
+      <li>Match all <b>24</b> scenario cards correctly before time runs out.</li>
+      <li><b>Time limit:</b> 5 minutes (300 seconds).</li>
+      <li>Review the 📋<b>Scenario Cards</b> at the bottom of the screen.</li>
+      <li>Drag and drop each scenario card onto the correct waste category on the <b>BINGO board</b>.</li>
       <li>The center <span style="font-weight:800;color:#D32F2F;">STEA</span> square is a <b>FREE</b> space.</li>
-      <li>Complete rows, columns, or diagonals to earn 🎯 BINGO lines.</li>
-      <li>Wrong placements increase your ❌ Wrong Attempts count.</li>
-      <li>Your final result is based on:
-        <ul style="margin-top:3px;padding-left:20px;">
-          <li>Correct Matches</li>
-          <li>BINGO Lines Achieved</li>
-          <li>Completion Time</li>
+      <li>Complete rows, columns, or diagonals to earn 🎯 <b>BINGO lines</b>.</li>
+      <li>Incorrect placements will increase your ❌ <b>Wrong Attempts</b> count.</li>
+    </ul>
+
+    <h4 style="text-align:left;font-size:25px;color:#1976D2;margin-top:25px;margin-bottom:10px;">Scoring</h4>
+    <p style="font-size:20px;line-height:1.6;color:#333">
+      Your final result is based on:
+    </p>
+    <ul style="margin-top:3px;padding-left:20px;font-size:20px;line-height:1.6;color:#333">
+          <li>✅ Correct Matches</li>
+          <li>🎯 BINGO Lines Achieved</li>
+          <li>⏱️ Completion Time</li>
         </ul>
-      <li>🔄 Reset: Reshuffle cards only, this will not reset the game progress. 🚪 Quit: Return to login screen.</li>
-      <li>Play in <b>Full-Screen</b> to have better user experience.</li>
-      </li>
-    </ol>
+      
+    <h5 style="text-align:left;font-size:25px;color:#1976D2;margin-top:25px;margin-bottom:10px;">Controls</h5>
+    <ul style="padding-left:20px;font-size:20px;line-height:1.6;color:#333">
+      <li>⚠️ To see all cards, play in full-screen (maximize window).</li>
+      <li>🔄 <b>Reset:</b> Reshuffle cards only (does not reset progress).</li>
+      <li>🚪 <b>Quit:</b> Return to login screen.</li>
+     </ul>
+    
 
     <div style="margin-top:15px;padding:10px;font-size:18px;background:#FFF8E1;border-left:4px solid #FFD700;border-radius:6px;border-right:4px solid #FFD700;border-radius:6px">
       <b>💡 Tips:</b> Use the TIMWOOD definitions and waste-identification tips shown beside the BINGO board.
@@ -338,47 +377,44 @@ const WT=[{id:'W',en:'Waiting'},{id:'T',en:'Transportation'},{id:'I',en:'Invento
 
 // ===== OFFICE SCENARIOS ONLY =====
 const OF=[
-{t:'T',en:'Walking to collect printed documents.',s:'🏢'},
-{t:'T',en:'Sending physical/digital files repeatedly.',s:'🏢'},
-{t:'T',en:'Project schedule is copied into multiple tracking tools.',s:'🏢'},
-{t:'T',en:'Transporting documents instead of digital sharing.',s:'🏢'},
+{t:'T',en:'Test data is exported, re-imported, and forwarded across tools instead of staying in one system.',s:'🏢'},
+{t:'T',en:'The same digital file is re-sent over email multiple times instead of linking once.',s:'🏢'},
+{t:'T',en:'Hard-copy documents are hand-carried between offices instead of shared digitally.',s:'🏢'},
 {t:'T',en:'Engineering drawings are emailed between relevant stakeholders instead of using a PLM system.',s:'🏢'},
 
 {t:'I',en:'Engineering Change Requests awaiting approval.',s:'🏢'},
 {t:'I',en:'Backlog of non-conformance reporting/SQN awaiting disposition.',s:'🏢'},
-{t:'I',en:'Purchase requisitions waiting for procurement approval.',s:'🏢'},
+{t:'I',en:'Purchase requisitions stacking up while waiting for procurement sign-off.',s:'🏢'},
 {t:'I',en:'Action items from meetings remain open for months.',s:'🏢'},
-{t:'I',en:'Supplier qualification applications waiting for assessment.',s:'🏢'},
 
 {t:'M',en:'Engineers spend time locating the latest drawing revision.',s:'🏢'},
 {t:'M',en:'Employees search multiple databases for project information.',s:'🏢'},
 {t:'M',en:'Program managers manually collect status updates from each team.',s:'🏢'},
 {t:'M',en:'Team members attend unnecessary meetings to obtain information.',s:'🏢'},
-{t:'M',en:'Scrolling through long email chains.',s:'🏢'},
+{t:'M',en:'Scrolling through long email chains to find one decision or attachment.',s:'🏢'},
 
 {t:'W',en:'Waiting for manager approvals.',s:'🏢'},
 {t:'W',en:'Delays in meeting start times.',s:'🏢'},
 {t:'W',en:'Waiting for inter-department responses.',s:'🏢'},
-{t:'W',en:'Pending for system data synchronization or manual updates.',s:'🏢'},
-{t:'W',en:'System downtime interruptions.',s:'🏢'},
+{t:'W',en:'Work stops during system downtime or data-sync interruptions',s:'🏢'},
 
 {t:'O',en:'Copying too many stakeholders in emails “just in case”.',s:'🏢'},
 {t:'O',en:'Creating unnecessary backup files.',s:'🏢'},
 {t:'O',en:'Creating extra forms that are rarely used.',s:'🏢'},
 {t:'O',en:'Generating multiple versions of documents without request.',s:'🏢'},
-{t:'O',en:'Multiple meeting summaries are produced for a single meeting.',s:'🏢'},
+{t:'O',en:'For a single meeting, multiple meeting summaries are produced.',s:'🏢'},
 
 {t:'P',en:'Entering the same data in multiple systems.',s:'🏢'},
-{t:'P',en:'Excessive formatting of documents.',s:'🏢'},
-{t:'P',en:'Spending excessive time formatting reports.',s:'🏢'},
-{t:'P',en:'Duplicate inspections or tests are performed.',s:'🏢'},
-{t:'P',en:'Teams conduct multiple review meetings covering the same topic.',s:'🏢'},
+{t:'P',en:'Spending excessive time on cosmetic formatting of reports and slides.',s:'🏢'},
+{t:'P',en:'Project schedule is manually copied into multiple tracking tools.',s:'🏢'},
+{t:'P',en:'Duplicate inspections or tests performed by different teams on the same item.',s:'🏢'},
+{t:'P',en:'Multiple review meetings held to cover the same topic with the same people.',s:'🏢'},
 
-{t:'D',en:'Incorrect drawing revisions are released.',s:'🏢'},
+{t:'D',en:'Outdated drawing revisions are released.',s:'🏢'},
 {t:'D',en:'Wrong part numbers are entered into the BOM.',s:'🏢'},
 {t:'D',en:'Data-entry mistakes create incorrect purchase orders.',s:'🏢'},
 {t:'D',en:'Project schedules contain inaccurate milestone dates, causing planning errors.',s:'🏢'},
-{t:'D',en:'Supplier requirements did not cascaded correctly.',s:'🏢'},
+{t:'D',en:'Supplier requirements did not cascaded correctly, leading to non-conformances.',s:'🏢'},
 ];
 
 const CLOUD_URL = "https://script.google.com/macros/s/AKfycbwAuonZrITzS7ASgzd52MMEVfd7Gflo9BGljYy9SxbpVBpj421LdtVXNd0cmNMqchv0/exec";
